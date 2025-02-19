@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import {NavigationContainer} from '@react-navigation/native'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {PedidoProvider} from './Context/pedidoContext'
+import pantallaDeinicio from './pantalla/pantallaHome'
+import pantallaPedidoshechos from './pantalla/pantallaPedido'
+import pantallaPedidoBorrado from './pantalla/pantallaEliminar'
 
-export default function App() {
+const Tab = createBottomTabNavigator();
+
+export default function App(){
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <PedidoProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Inicio" component={pantallaDeinicio}/>
+          <Tab.Screen name="Hacer Pedido" component={pantallaPedidoshechos}/>
+          <Tab.Screen name="Pedidos eliminados" component={pantallaPedidoBorrado}/>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PedidoProvider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
